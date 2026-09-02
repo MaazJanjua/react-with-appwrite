@@ -6,6 +6,8 @@ export default function Protected({ children, authentication = true }) {
 
     const navigate = useNavigate()
     const [loader, setLoader] = useState(true);
+
+    //Getting auth status from Redux
     const authStatus = useSelector(state => state.auth.status)
 
     useEffect(() => {
@@ -25,7 +27,13 @@ export default function Protected({ children, authentication = true }) {
         //     navigate("/")
         // }
 
-        //3rd way 
+        //3rd way
+        // if (authStatus !== authentication) {
+        //     navigate(authentication ? "/login" : "/")
+        // }
+
+
+        //4th way 
         if (authentication && authStatus !== authentication) {
             navigate("/login")
         } else if (!authentication && authStatus !== authentication) {
